@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/dselans/dmidecode.svg?branch=master)](https://travis-ci.org/dselans/dmidecode)
+[![Build Status](https://travis-ci.com/hosting-de-labs/dmidecode.svg?branch=master)](https://travis-ci.com/hosting-de-labs/dmidecode)
 
 dmidecode
 =========
