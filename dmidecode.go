@@ -13,7 +13,9 @@ type DMIType int
 
 const (
 	DMIDecodeBinary = "dmidecode"
+)
 
+const (
 	DMITypeUnknown DMIType = iota
 	DMITypeSystem
 	DMITypeBaseBoard
