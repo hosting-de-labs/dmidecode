@@ -9,8 +9,53 @@ import (
 	"strings"
 )
 
+type DMIType int
+
 const (
 	DMIDecodeBinary = "dmidecode"
+
+	DMITypeUnknown DMIType = iota
+	DMITypeSystem
+	DMITypeBaseBoard
+	DMITypeChassis
+	DMITypeProcessor
+	DMITypeMemoryController
+	DMITypeMemoryModule
+	DMITypeCache
+	DMITypePortConnector
+	DMITypeSystemSlots
+	DMITypeOnBoardDevices
+	DMITypeOEMStrings
+	DMITypeSystemConfigurationOptions
+	DMITypeBIOSLanguage
+	DMITypeGroupAssociations
+	DMITypeSystemEventLog
+	DMITypePhysicalMemoryArray
+	DMITypeMemoryDevice
+	DMIType32MemoryError
+	DMITypeMemoryArrayMappedAddress
+	DMITypeMemoryDeviceMappedAddress
+	DMITypeBuiltInPointingDevice
+	DMITypePortableBattery
+	DMITypeSystemReset
+	DMITypeHardwareSecurity
+	DMITypeSystemPowerControls
+	DMITypeVoltageProbe
+	DMITypeCoolingDevice
+	DMITypeTemperatureProbe
+	DMITypeElectricalCurrentProbe
+	DMITypeOutOfBandRemoteAccess
+	DMITypeBootIntegrityServices
+	DMITypeSystemBoot
+	DMIType64BitMemoryError
+	DMITypeManagementDevice
+	DMITypeManagementDeviceComponent
+	DMITypeManagementDeviceThresholdData
+	DMITypeMemoryChannel
+	DMITypeIPMIDevice
+	DMITypePowerSupply
+	DMITypeAdditionalInformation
+	DMITypeOnboardDevice
 )
 
 type Record map[string]string
@@ -18,6 +63,10 @@ type Record map[string]string
 type DMI struct {
 	Data   map[string][]Record
 	Binary string
+}
+
+func (d DMIType) String() string {
+	return strconv.Itoa(int(d))
 }
 
 func New() *DMI {
@@ -191,4 +240,9 @@ func (d *DMI) SearchByName(name string) ([]Record, error) {
 // SearchByType will search for a specific DMI record by its type in d.Data
 func (d *DMI) SearchByType(id int) ([]Record, error) {
 	return d.GenericSearchBy("DMIType", strconv.Itoa(id))
+}
+
+// SearchByType will search for a specific DMI record by its type in d.Data
+func (d *DMI) SearchByDMIType(id DMIType) ([]Record, error) {
+	return d.GenericSearchBy("DMIType", id.String())
 }
