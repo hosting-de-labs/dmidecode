@@ -120,6 +120,10 @@ func TestSearchBy(t *testing.T) {
 		t.Error("Should have received an error when Search ran prior to .Run()")
 	}
 
+	if _, err := dmi.SearchByDMIType(DMITypeSystem); err == nil {
+		t.Error("Should have received an error when Search ran prior to .Run()")
+	}
+
 	if _, err := dmi.GenericSearchBy("DMIName", "System Information"); err == nil {
 		t.Error("Should have received an error when Search ran prior to .Run()")
 	}
@@ -143,6 +147,15 @@ func TestSearchBy(t *testing.T) {
 	}
 
 	if len(byTypeData) == 0 {
+		t.Error("Returned data should have more than 0 records")
+	}
+
+	byDMITypeData, byDMITypeErr := dmi.SearchByDMIType(DMITypeSystem)
+	if byDMITypeErr != nil {
+		t.Errorf("Shouldn't receive errors when searching by name. Error: %v", byDMITypeErr)
+	}
+
+	if len(byDMITypeData) == 0 {
 		t.Error("Returned data should have more than 0 records")
 	}
 
