@@ -168,3 +168,11 @@ func TestSearchBy(t *testing.T) {
 		t.Error("Returned data should have more than 0 records")
 	}
 }
+
+func TestConstants(t *testing.T) {
+	stringType := DMITypeMemoryDevice.String()
+
+	if stringType != "17" {
+		t.Errorf("Unexpected type: %s", stringType)
+	}
+}
